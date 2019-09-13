@@ -34,4 +34,4 @@
 
 17. Play StarWars movio on terminal.
 
-18. make man page exe
+18. Make man page exe
