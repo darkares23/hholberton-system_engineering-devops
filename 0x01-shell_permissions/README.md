@@ -14,20 +14,24 @@
 
 7. groups: Prints group information and permissions
 
-8. add permision with numerals
+8. Add permision with numerals
 
-9. set the mode of a file
+9. Set the mode of a file
 
-10. copy other file mode
+10. Copy other file mode
 
-11. give permissions to all directory files and folders
+11. Give permissions to all directory files and folders
 
 12. Create a directory with permissions
 
-13. change the group owner
+13. Change the group owner
 
 14. Change the owner and group owner of a file
 
 15. Changes the owner and the group owner of the file symbolic link
 
-16. changes the owner only if it is from a specific owner (--from)
+16. Changes the owner only if it is from a specific owner (--from)
+
+17. Play StarWars movio on terminal.
+
+18. make man page exe
