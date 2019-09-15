@@ -1,0 +1,2 @@
+**SHELL REDIRECTIONS**
+- This is a README file
