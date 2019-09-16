@@ -1,2 +1,2 @@
 #!/bin/bash
-ecgo $(($BREATH**$LOVE))
+echo $(($BREATH**$LOVE))
