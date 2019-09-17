@@ -1,2 +1,2 @@
 #!/bin/bash
-ls / |sed -n 'n;p;'
+ls / |sed -n 'p;n;'
