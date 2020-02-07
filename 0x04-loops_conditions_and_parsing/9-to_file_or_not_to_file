@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # displays current content of dir
 file="holbertonschool"
-if [[ -f $file ]];
+if [[ -e $file ]];
 then
     echo "$file file exists"
     if [[ ! -s $file ]];
