@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Printing 10 times holberton school
+h=0
+m=1
+
+while ((h < 13)); 
+do
+	echo "Hour: $h"
+	while ((m < 60));
+	do
+		echo $m
+		((m++))
+	done
+	m=1
+	((h++))
+done

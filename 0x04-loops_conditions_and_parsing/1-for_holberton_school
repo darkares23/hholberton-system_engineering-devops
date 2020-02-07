@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Printing 10 times holberton school
+for i in {0..9}
+	do echo 'Holberton School'
+	((i++))
+done
