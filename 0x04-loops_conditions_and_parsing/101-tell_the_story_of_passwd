@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #a Bash script that displays the content of the file /etc/passwd.
-
 IFS=':'
 while read l1 l2 l3 l4 l5 l6 l7; do
     printf "The user %s is part of the %s gang, lives in %s and rides %s. %s's place is protected by \
