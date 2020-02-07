@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# displays current content of dir
+file="/etc/passwd"
+while read line ; do
+	echo "$line" | cut -d ":" -f 1,3,6
+done < $file
