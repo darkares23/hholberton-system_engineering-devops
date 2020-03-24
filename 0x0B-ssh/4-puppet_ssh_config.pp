@@ -7,5 +7,5 @@ file_line { 'Remove passwd authentication':
 file_line { 'Identity File':
   ensure => 'present',
   path => '/etc/ssh/ssh_config',
-  line => 'IdentityFile /home/juan/.ssh/holberton'
+  line => 'IdentityFile /juan/.ssh/holberton',
 }
