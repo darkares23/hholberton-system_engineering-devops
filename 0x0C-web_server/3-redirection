@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Install nginx and redirect 301 (moved permantly)
+sudo apt-get update -y
+sudo apt-get install -y nginx
+echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
+sudo service nginx start
+
+file="/etc/nginx/sites-available/default"
+sudo sed -i 
