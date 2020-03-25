@@ -6,4 +6,5 @@ echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
 sudo service nginx start
 
 file="/etc/nginx/sites-available/default"
-sudo sed -i 
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" $file
+sudo service nginx start
