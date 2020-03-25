@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# instal nginx and set up index.html
+
+sudo apt-get update -y &&
+sudo sudo apt-get install -y nginx &&
+sudo mkdir -p /var/www/html/ &&
+echo "holberton School" | sudo tee /var/www/html/index.html &&
+service nginx start
