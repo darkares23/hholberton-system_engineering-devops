@@ -2,5 +2,5 @@
 # Install nginx and redirect 301 (moved permantly)
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo sed -i "/^\tlocation \// i\ \tlocation /redirect_me {\n\t\treturn 301 https://calypsobronte.me;\n\t}" /etc/nginx/sites-enabled/default
+sudo sed -i "/^\tlocation \// i\ \tlocation /redirect_me {\n\t\treturn 301 https://facebook.com;\n\t}" /etc/nginx/sites-enabled/default
 sudo service nginx restart
