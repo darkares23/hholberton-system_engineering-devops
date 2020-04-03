@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#onfigure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
+sudo apt-get update
+sudo apt-get install -y nginx
+echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+re_text="rewrite ^/redirect_me facebook.com permanent;"
+h_text="add_header X-Served-By $HOSTNAME;"
+err_text="error_page 404 /custom_404.html; location = /custom_404.html {root /usr/share/nginx/html;\n internal;}"
+sed -i "/listen 80 default_server/a $re_text\n\t$h_text\n\t$err_text" /etc/nginx/sites-available/default
+sudo service nginx start
