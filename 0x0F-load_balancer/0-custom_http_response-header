@@ -7,5 +7,5 @@ sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
 re_text="rewrite ^/redirect_me http://facebook.com permanent;"
 h_text="add_header X-Served-By $HOSTNAME;"
 err_text="error_page 404 /custom_404.html; location = /custom_404.html {root /usr/share/nginx/html;\n internal;}"
-sed -i "/listen 80 default_server/a $re_text\n\t$h_text\n\t$err_text" /etc/nginx/sites-available/default
+sudo sed -i "/listen 80 default_server/a $re_text\n\t$h_text\n\t$err_text" /etc/nginx/sites-available/default
 sudo service nginx start
