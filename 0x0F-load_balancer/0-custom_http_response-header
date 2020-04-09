@@ -4,8 +4,7 @@ sudo apt-get update
 sudo apt-get install -y nginx
 echo "Holberton School for the win!" | sudo tee /var/www/html/index.html
 sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
-re_text="rewrite ^/redirect_me http://facebook.com permanent;"
-h_text="add_header X-Served-By $HOSTNAME;"
-err_text="error_page 404 /custom_404.html; location = /custom_404.html {root /usr/share/nginx/html;\n internal;}"
-sudo sed -i "/http {/a \ \tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+if ! grep -q "add_header X-Served-By" /etc/nginx/nginx.conf; then
+	sudo sed -i "s/http {/http {\n\tadd_header X-Served-By \$hostname;dd_header X-Served-By \$hostname;/" /etc/nginx/nginx.conf
+fi
 sudo service nginx start
