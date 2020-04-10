@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
-#a script to run a command as another user
-sudo -u "$1" bash -c 'whoami'
+# Set a shell for a desired user
+# and execute the "whoami" command
+#
+
+user="$1"
+
+if [ "$user" ] ; then
+    chsh -s "$(which bash)" "$user" && su "$user" -c "whoami"
+fi
