@@ -16,11 +16,11 @@ SUBDOMAIN=$2
 if [ -z "$SUBDOMAIN" ]
 then
     # print info for all submodules
-    domain_info "www" "$DOMAIN"
-    domain_info "lb-01" "$DOMAIN"
-    domain_info "web-01" "$DOMAIN"
-    domain_info "web-02" "$DOMAIN"
+    domain_info "$DOMAIN" "www"
+    domain_info "$DOMAIN" "lb-01"
+    domain_info "$DOMAIN" "web-01"
+    domain_info "$DOMAIN" "web-02"
 else
     # print info for subdomain in $SUBDOMAIN
-    domain_info "$SUBDOMAIN" "$DOMAIN"
+    domain_info "$DOMAIN" "$SUBDOMAIN"
 fi
