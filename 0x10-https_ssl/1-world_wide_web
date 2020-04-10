@@ -8,16 +8,12 @@ domain_info() {
 	return 0
 }
 
-# Entry point
-# if only variable $1 (DOMAIN name)
 if [ -z "$2" ]
 then
-    # print info for all submodules
     domain_info "$1" "www"
     domain_info "$1" "lb-01"
     domain_info "$1" "web-01"
     domain_info "$1" "web-02"
 else
-    # print info for subdomain in $SUBDOMAIN
     domain_info "$1" "$2"
 fi
