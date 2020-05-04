@@ -3,21 +3,21 @@
 Python script that, using this REST API, for a given employee
 ID, returns information about his/her TODO list progress.
 """
-import requests
 import json
+import requests
 from sys import argv
 
 
 if __name__ == "__main__":
-    id = argv[1]
+    _id = argv[1]
 
     res = requests.get('https://jsonplaceholder.typicode.com/users?id={}'.
-                       format(id))
+                       format(_id))
     userText = json.loads(res.text)
     name = userText[0].get('name')
 
     todo = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
-                        .format(id))
+                        .format(_id))
     todos = json.loads(todo.text)
     doneTitle = []
 
