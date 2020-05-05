@@ -3,29 +3,26 @@
 Python script that, using this REST API, for a given employee
 ID, returns information about his/her TODO list progress.
 """
-import requests
 import json
-import csv
+from requests import get
+from sys import argv
 
 if __name__ == "__main__":
-
-    res = requests.get('https://jsonplaceholder.typicode.com/users')
-    usersText = json.loads(res.text)
-    dic = {}
-    for u in usersText:
-        taskList = []
-        dic[u.get('id')] = taskList
-        todo = requests.get(
-               'https://jsonplaceholder.typicode.com/todos?userId={}'
-               .format(u.get('id')))
-        todos = json.loads(todo.text)
-
-        for i in todos:
-            task = {}
-            task['task'] = i.get('title')
-            task['completed'] = i.get('completed')
-            task['username'] = i.get('username')
-            taskList.append(task)
-
-    with open("todo_all_employees.json", 'w', encoding="utf-8") as f:
-        f.write(json.dumps(dic))
+    file = 'todo_all_employees.json'
+    url1 = 'https://jsonplaceholder.typicode.com/users'
+    users = get(url1).json()
+    _json = {}
+    for user in users:
+        user_id = user['id']
+        username = user['username']
+        tasks = get(url1 + '/' + str(user_id) + '/todos').json()
+        my_list = []
+        for task in tasks:
+            _dict = {}
+            _dict["username"] = username
+            _dict["task"] = task["title"]
+            _dict["completed"] = task["completed"]
+            my_list.append(_dict)
+        _json[user_id] = my_list
+    with open(file, 'w') as f:
+        json.dump(_json, f)

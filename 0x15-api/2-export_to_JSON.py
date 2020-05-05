@@ -3,32 +3,24 @@
 Python script that, using this REST API, for a given employee
 ID, returns information about his/her TODO list progress.
 """
-import requests
 import json
-import csv
+from requests import get
 from sys import argv
 
-
 if __name__ == "__main__":
-    id = argv[1]
-
-    res = requests.get('https://jsonplaceholder.typicode.com/users?id={}'.
-                       format(id))
-    userText = json.loads(res.text)
-    name = userText[0].get('name')
-
-    todo = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
-                        .format(id))
-    todos = json.loads(todo.text)
-
-    taskList = []
-    dic = {'{}'.format(id): taskList}
-    for i in todos:
-        task = {}
-        task['task'] = i.get('title')
-        task['completed'] = i.get('completed')
-        task['username'] = name
-        taskList.append(task)
-
-    with open("{}.json".format(id), 'w', encoding="utf-8") as f:
-        f.write(json.dumps(dic))
+    url1 = 'https://jsonplaceholder.typicode.com/users/' + argv[1]
+    user = get(url1).json()
+    user = user['username']
+    tasks = get(url1 + '/todos').json()
+    file = argv[1] + '.json'
+    my_list = []
+    _json = {}
+    for task in tasks:
+        _dict = {}
+        _dict["task"] = task["title"]
+        _dict["completed"] = task["completed"]
+        _dict["username"] = user
+        my_list.append(_dict)
+    _json[argv[1]] = my_list
+    with open(file, 'w') as f:
+        json.dump(_json, f)
