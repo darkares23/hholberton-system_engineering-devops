@@ -7,18 +7,17 @@ listed for a given subreddit.
 
 import json
 from requests import get
-from pprint import pprint
 
 
 def top_ten(subreddit):
-    header = {'user-agent': 'X-Modhash'}
-    limit = {'limit': 11}
-    url = "https://reddit.com/r/{}/hot.json".format(subreddit)
-    res = get(url, headers=header, params=limit)
+
+    headers = {'user-agent': 'X-Modhash'}
+    limit = {'limit': 10}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    res = get(url, headers=headers, allow_redirects=False, params=limit)
     resJson = res.json()
-    subreditsList = resJson['data']['children']
     if res.status_code == 404:
-        print('None')
+        print(None)
     else:
-        for subre in subreditsList:
-            print(subre["data"]["title"])
+        for post in resJson["data"]["children"]:
+            print(post["data"]["title"])
