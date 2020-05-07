@@ -12,7 +12,7 @@ from pprint import pprint
 
 def top_ten(subreddit):
     header = {'user-agent': 'X-Modhash'}
-    limit = {'limit': 11}
+    limit = {'limit': 10}
     url = "https://reddit.com/r/{}/hot.json".format(subreddit)
     res = get(url, headers=header, params=limit)
     resJson = res.json()
@@ -20,5 +20,9 @@ def top_ten(subreddit):
     if res.status_code == 404:
         print('None')
     else:
+        acum = 0
         for subre in subreditsList:
             print(subre["data"]["title"])
+            acum += 1
+            if acum == 10:
+                break
