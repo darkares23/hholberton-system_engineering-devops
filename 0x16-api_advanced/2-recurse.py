@@ -12,20 +12,17 @@ from requests import get
 
 def recurse(subreddit, hot_list=[], after=""):
     header = {'user-agent': 'X-Modhash'}
-    limit = {'after': after}
-    url = "https://reddit.com/r/{}/hot.json".format(
-           subreddit)
-    if after:
-        limit['after'] = after
-    res = get(url, headers=header, params=limit)
+    params = {'after': after}
+    url = "https://www.reddit.com/r/" + subreddit + "/hot.json"
+    res = get(url, headers=header, params=params, allow_redirects=False)
     resJson = res.json()
-    if res.status_code == 404 or res.status_code == 302:
-        return('None')
+    if res.status_code == 404 or res.status_code == 301:
+        return (None)
     else:
-        for subs in resJson['data']['children']:
-            hot_list.append(subs['data']['title'])
-        after = res.json()['data']['after']
-        if after is None:
-            return hot_list
+        for post in resJson["data"]["children"]:
+            hot_list.append(post["data"]["title"])
+        v_aft = resJson["data"]["after"]
+        if v_aft is not None:
+            return (recurse(subreddit, hot_list, v_aft))
         else:
-            return recurse(subreddit, hot_list, after)
+            return hot_list
