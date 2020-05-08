@@ -13,7 +13,7 @@ from requests import get
 def recurse(subreddit, hot_list=[], after=""):
     header = {'user-agent': 'X-Modhash'}
     params = {'after': after}
-    url = "https://www.reddit.com/r/" + subreddit + "/hot.json"
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     res = get(url, headers=header, params=params, allow_redirects=False)
     resJson = res.json()
     if res.status_code == 404 or res.status_code == 301:
