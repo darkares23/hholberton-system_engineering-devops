@@ -24,6 +24,7 @@ def recurse(subreddit, hot_list=[], after=None):
     else:
         for subs in subreditsList:
             hot_list.append(subs['data']['title'])
+        after = res.json()['data']['title']
         if resJson['data']['after']:
             return recurse(subreddit, hot_list, after=resJson['data']['after'])
         else:
