@@ -1,28 +1,30 @@
 #!/usr/bin/python3
 """
-function that queries the Reddit API and
-prints the titles of the first 10 hot posts
-listed for a given subreddit.
+Function that queries the Reddit API and returns
+a list containing the titles of all hot articles for a given subreddit.
+If no results are found for the given subreddit, the function should
+return None.
 """
 
 import json
 from requests import get
-from pprint import pprint
 
 
-def top_ten(subreddit):
+def recurse(subreddit, hot_list=[], after=None):
     header = {'user-agent': 'X-Modhash'}
-    limit = {'limit': 10}
-    url = "https://reddit.com/r/{}/hot.json".format(subreddit)
+    limit = {'limit': 100}
+    url = "https://reddit.com/r/{}/hot.json?after".format(subreddit)
+    if after:
+        limit['after'] = after
     res = get(url, headers=header, params=limit)
     resJson = res.json()
     subreditsList = resJson['data']['children']
-    if res.status_code == 404:
+    if res.status_code == 404 or res.status_code == 302:
         print('None')
     else:
-        acum = 0
-        for subre in subreditsList:
-            print(subre["data"]["title"])
-            acum += 1
-            if acum == 10:
-                break
+        for subs in subreditsList:
+            hot_list.append(subs['data']['title'])
+        if resJson['data']['after']:
+            return recurse(subreddit, hot_list, after=resJson['data']['after'])
+        else:
+            return hot_list
