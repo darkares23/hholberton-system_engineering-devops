@@ -13,7 +13,8 @@ from requests import get
 def recurse(subreddit, hot_list=[], after=None):
     header = {'user-agent': 'X-Modhash'}
     limit = {'limit': 100}
-    url = "https://reddit.com/r/{}/hot.json?after".format(subreddit)
+    url = "https://reddit.com/r/{}/hot.json?after{}".format(
+           subreddit, str(after))
     if after:
         limit['after'] = after
     res = get(url, headers=header, params=limit)
@@ -24,8 +25,8 @@ def recurse(subreddit, hot_list=[], after=None):
     else:
         for subs in subreditsList:
             hot_list.append(subs['data']['title'])
-        after = res.json()['data']['title']
-        if resJson['data']['after']:
+        after = res.json()['data']['after']
+        if after is None:
             return recurse(subreddit, hot_list, after=resJson['data']['after'])
         else:
             return hot_list
