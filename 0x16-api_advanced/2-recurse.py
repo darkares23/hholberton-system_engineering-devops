@@ -16,7 +16,7 @@ def recurse(subreddit, hot_list=[], after=None):
     url = "https://reddit.com/r/{}/hot.json?after".format(subreddit)
     if after:
         limit['after'] = after
-    res = get(url, headers=header, allow_redirects=False, params=limit)
+    res = get(url, headers=header, params=limit)
     resJson = res.json()
     subreditsList = resJson['data']['children']
     if res.status_code == 404 or res.status_code == 302:
