@@ -1,4 +1,4 @@
-# This puppet manifest replaces a type in a wordpress config file and restarts
+# Replaces a type in a wordpress config file and restarts
 file { '/var/www/html/wp-settings.php':
   ensure => present,
 }
